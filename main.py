@@ -32,8 +32,12 @@ def calculate_metrics(url):
     # loop through each java file
     for file in java_files:
         # read the contents of the file
-        with open(file, 'r', encoding='utf-8') as f:
-            content = f.read()
+        try:
+            with open(file, 'r', encoding='utf-8') as f:
+                content = f.read()
+        except UnicodeDecodeError:
+            print(f'Error reading file {file}: UnicodeDecodeError')
+            continue
 
         # calculate the LOC metric
         lines = content.split('\n')
