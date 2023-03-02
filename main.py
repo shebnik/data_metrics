@@ -84,7 +84,7 @@ def calculate_metrics(url):
         ANGM /= NC
         ANCM /= NC
 
-    return [repo_name, url, LOC, NC, ANA, ANM, ANSM, ANGM, ANCM, NGen, NAssoc]
+    return [repo_name, url, "{:.4f}".format(LOC), "{:.4f}".format(NC), "{:.4f}".format(ANA), "{:.4f}".format(ANM), "{:.4f}".format(ANSM), "{:.4f}".format(ANGM), "{:.4f}".format(ANCM), "{:.4f}".format(NGen), "{:.4f}".format(NAssoc)]
 
 
 if __name__ == '__main__':
