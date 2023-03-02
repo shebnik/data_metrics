@@ -88,7 +88,7 @@ def calculate_metrics(url):
 
 
 if __name__ == '__main__':
-    with open('urls.txt', 'r') as input_file, open('results.csv', 'w', newline='') as output_file:
+    with open('rep50S.txt', 'r') as input_file, open('results2.csv', 'w', newline='') as output_file:
         # create the repositories directory if it does not exist
         if not os.path.exists('repositories'):
             os.makedirs('repositories')
