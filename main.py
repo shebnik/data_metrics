@@ -84,11 +84,11 @@ def calculate_metrics(url):
         ANGM /= NC
         ANCM /= NC
 
-    return [repo_name, url, "{:.4f}".format(LOC), "{:.4f}".format(NC), "{:.4f}".format(ANA), "{:.4f}".format(ANM), "{:.4f}".format(ANSM), "{:.4f}".format(ANGM), "{:.4f}".format(ANCM), "{:.4f}".format(NGen), "{:.4f}".format(NAssoc)]
+    return [repo_name, url, LOC, NC, "{:.4f}".format(ANA), "{:.4f}".format(ANM), "{:.4f}".format(ANSM), "{:.4f}".format(ANGM), "{:.4f}".format(ANCM), NGen, NAssoc]
 
 
 if __name__ == '__main__':
-    with open('rep50S.txt', 'r') as input_file, open('results2.csv', 'w', newline='') as output_file:
+    with open('urls.txt', 'r') as input_file, open('results.csv', 'w', newline='') as output_file:
         # create the repositories directory if it does not exist
         if not os.path.exists('repositories'):
             os.makedirs('repositories')
