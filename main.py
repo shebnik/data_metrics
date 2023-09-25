@@ -5,15 +5,15 @@ import shutil
 
 language = 'java'
 
-def calculate_metrics(url):
+def calculate_metrics(url, i):
     # clone the repository
     repo_name = url.split('/')[-1]
-    os.system(f'git clone {url} repositories/{repo_name}')
+    os.system(f'git clone {url} repositories/{i}_{repo_name}')
     print(f'Cloned {repo_name} repository')
 
     # get all the java files in the repository
     java_files = []
-    for root, dirs, files in os.walk(f'repositories/{repo_name}'):
+    for root, dirs, files in os.walk(f'repositories/{i}_{repo_name}'):
         for file in files:
             if file.endswith(f".{language}"):
                 java_files.append(os.path.join(root, file))
@@ -88,7 +88,7 @@ def calculate_metrics(url):
 
 
 if __name__ == '__main__':
-    with open('urls3.txt', 'r') as input_file, open('results3.csv', 'w', newline='') as output_file:
+    with open('urls.txt', 'r') as input_file, open('results.csv', 'w', newline='') as output_file:
         # create the repositories directory if it does not exist
         if not os.path.exists('repositories'):
             os.makedirs('repositories')
@@ -101,12 +101,14 @@ if __name__ == '__main__':
                         'ANSM', 'ANGM', 'ANCM', 'NGen', 'NAssoc'])
 
         # Loop over each repository URL in the input file
+        i = 1
         for url in input_file:
             # Calculate the metrics for the repository
-            metrics = calculate_metrics(url.replace('\n', ''))
+            metrics = calculate_metrics(url.replace('\n', ''), i)
 
             # Write the metrics to the output file
             writer.writerow(metrics)
+            i += 1
 
         # Delete the repositories directory
-        # shutil.rmtree('repositories')
+        shutil.rmtree('repositories')
