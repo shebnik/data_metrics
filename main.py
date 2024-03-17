@@ -110,5 +110,3 @@ if __name__ == '__main__':
             writer.writerow(metrics)
             i += 1
 
-        # Delete the repositories directory
-        shutil.rmtree('repositories')
