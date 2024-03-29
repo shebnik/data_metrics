@@ -27,7 +27,6 @@ https://github.com/danielbryantuk/oreilly-docker-java-shopping
 https://github.com/whoiszxl/shopzz
 https://github.com/marwa-eltayeb/Souq_ShopOnline
 https://github.com/shashirajraja/shopping-cart
-https://github.com/mate-academy/jv-fruit-shop
 https://github.com/NearbyShops/Nearby-Shops-Android-app
 https://github.com/tonyvu2014/android-shoppingcart
 https://github.com/akshayub/NITKart
