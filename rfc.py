@@ -14,7 +14,17 @@ with open("urls.txt", "r") as f:
 
 with open("results.csv", "w", newline="") as output_file:
     writer = csv.writer(output_file)
-    writer.writerow(["Repository", "URL", "Total RFC", "Total CBO"])
+    writer.writerow(
+        [
+            "Repository",
+            "URL",
+            "Total NCL",
+            "Total RFC",
+            "Total CBO",
+            "Relative RFC",
+            "Relative CBO",
+        ]
+    )
 
     i = 1
     for url in urls:
@@ -33,9 +43,11 @@ with open("results.csv", "w", newline="") as output_file:
         subprocess.run(analysis_cmd, shell=True, check=True)
 
         class_csv_file_name = f"{project_name}-Class.csv"
+        package_csv_file_name = f"{project_name}-Package.csv"
 
         total_rfc = 0
         total_cbo = 0
+        total_ncl = 0
         for root, dirs, files in os.walk(results_dir):
             for file in files:
                 if file == class_csv_file_name:
@@ -47,6 +59,24 @@ with open("results.csv", "w", newline="") as output_file:
                             total_rfc += int(row["RFC"])
                             total_cbo += int(row["CBO"])
 
-        writer.writerow([repo_name, url, total_rfc, total_cbo])
+                if file == package_csv_file_name:
+                    package_csv_file = os.path.join(root, file)
+
+                    with open(package_csv_file, "r") as f:
+                        reader = csv.DictReader(f)
+                        for row in reader:
+                            total_ncl += int(row["NCL"])
+
+        writer.writerow(
+            [
+                repo_name,
+                url,
+                total_ncl,
+                total_rfc,
+                total_cbo,
+                total_rfc / total_ncl,
+                total_cbo / total_ncl,
+            ]
+        )
 
         i += 1
