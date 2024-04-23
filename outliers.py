@@ -19,6 +19,8 @@ def normalize_data(x, y):
     print()
     print(f"y: {y}")
     print()
+    
+    return x, y
 
 def calculate_cov_inv(x, y):
     n = len(x)
@@ -121,7 +123,7 @@ def mardia_multivariate_kurtosis(x, y):
 
 if __name__ == "__main__":
     x, y = retrieve_data()
-    # x, y = normalize_data(x, y)
+    x, y = normalize_data(x, y)
 
     outliers = determine_outliers(x, y)
     while len(outliers) > 0:
