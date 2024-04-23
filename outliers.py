@@ -10,6 +10,16 @@ def retrieve_data():
     return x, y
 
 
+def normalize_data(x, y):
+    x = np.log10(x)
+    y = np.log10(y)
+
+    print("Нормалізовані дані (log10)")
+    print(f"x: {x}")
+    print()
+    print(f"y: {y}")
+    print()
+
 def calculate_cov_inv(x, y):
     n = len(x)
     rfc_mean = np.mean(x)
@@ -52,11 +62,10 @@ def determine_outliers(x, y):
     a = 0.005
     fisher_f = f.ppf(1 - a, 2, n - 2)
 
-    # Determine outliers
     indexes = []
     for i in range(n):
         if test_statistic[i] > fisher_f:
-            print(f"Outlier detected: x={x[i]}, y={y[i]}")
+            print(f"Видалено викид: x={x[i]}, y={y[i]}")
             indexes.append(i)
     return indexes
 
@@ -112,12 +121,16 @@ def mardia_multivariate_kurtosis(x, y):
 
 if __name__ == "__main__":
     x, y = retrieve_data()
+    # x, y = normalize_data(x, y)
+
     outliers = determine_outliers(x, y)
     while len(outliers) > 0:
         x = np.delete(x, outliers)
         y = np.delete(y, outliers)
         outliers = determine_outliers(x, y)
-    print("No more outliers detected.")
+
+    print("Викидів не виявлено")
+    print()
 
     skewness_stat, skewness_p = mardia_multivariate_skewness(x, y)
     kurtosis_stat, kurtosis_p = mardia_multivariate_kurtosis(x, y)
