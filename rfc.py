@@ -23,6 +23,9 @@ with open("results.csv", "w", newline="") as output_file:
             "Total CBO",
             "Relative RFC",
             "Relative CBO",
+            "WMC",
+            "DIT",
+            "NOC"
         ]
     )
 
@@ -49,6 +52,9 @@ with open("results.csv", "w", newline="") as output_file:
             total_rfc = 0
             total_cbo = 0
             total_ncl = 0
+            total_wmc = 0
+            total_dit = 0
+            total_noc = 0
             for root, dirs, files in os.walk(results_dir):
                 for file in files:
                     if file == class_csv_file_name:
@@ -59,6 +65,9 @@ with open("results.csv", "w", newline="") as output_file:
                             for row in reader:
                                 total_rfc += int(row["RFC"])
                                 total_cbo += int(row["CBO"])
+                                total_wmc += int(row["WMC"])
+                                total_dit += int(row["DIT"])
+                                total_noc += int(row["NOC"])
 
                     if file == package_csv_file_name:
                         package_csv_file = os.path.join(root, file)
@@ -77,6 +86,10 @@ with open("results.csv", "w", newline="") as output_file:
                     total_cbo,
                     total_rfc / total_ncl,
                     total_cbo / total_ncl,
+                    total_wmc,
+                    total_dit,
+                    total_noc
+                    
                 ]
             )
         except Exception as e:
